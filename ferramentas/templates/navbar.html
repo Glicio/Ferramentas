@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% block header %}
+
+
+{% endblock %}
+</head>
+<body>
+    <nav class="header">
+        <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='rsc/ferramentas.svg')}}" alt="Logo" width="70" height="50"></a>
+        <div class="logo">
+                <h1>FERRAMENTAS</h1>
+            </a>
+            <p>Ferramentas para gestão de processos e folhas</p>
+        </div>
+        <div class="links-header">
+            {% if current_user.is_authenticated %}
+            <a href="{{url_for('logout_page')}}" class="btn"><img src="{{url_for('static',filename='rsc/logout.svg')}}" alt="certidao" width="24" height="24" class="icon"><span>Deslogar-se</span></a>
+                {% if current_user.nivel == 3%}
+                    <a href="{{url_for('register_page')}}" class="btn"><img src="{{url_for('static',filename='rsc/incluir.svg')}}" alt="certidao" width="24" height="24" class="icon"><span>Incluir Usuário</span></a>
+                {% endif %}
+            {% else %}
+            <a href="{{url_for('login_page')}}" class="btn"><img src="{{url_for('static',filename='rsc/login.svg')}}" alt="certidao" width="24" height="24" class="icon"><span>Logar-se</span></a>
+            {% endif%}
+            <a href="{{url_for('memorando')}}" class="btn"><img src="{{url_for('static',filename='rsc/memorando.svg')}}" alt="certidao" width="24" height="24" class="icon"><span>Memorandos</span></a>
+            <a href="{{url_for('folha')}}" class="btn"><img src="{{url_for('static',filename='rsc/folha.svg')}}" alt="certidao" width="24" height="24" class="icon"><span>Classificar Folhas</span></a>
+            <a href="{{url_for('certidoes')}}" class="btn"><img src="{{url_for('static',filename='rsc/certidao.svg')}}" alt="Bransão de Alagoas" width="24" height="24" class="icon"><span>Emitir certidões</span></a>
+        </div>
+    </nav>
+{% block content%}
+
+{% endblock%}
+</body>
+</html>

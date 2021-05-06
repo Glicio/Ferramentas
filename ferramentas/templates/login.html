@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+{%extends "navbar.html"%}
+<head>
+    {%block header%}
+    <meta charset="UTF-8">
+    <title>Logar-Se</title>
+    {%endblock%}
+</head>
+<body>
+{%block content%}
+    <div class="links">
+        <h1>LOGAR-SE</h1>
+        <form method="post">
+            {{ form.csrf_token }}
+            <div class="campo">
+                {{form.name.label}}
+                {{form.name(autocomplete="on")}}
+            </div>
+            <div class="campo">
+                {{form.password.label}}
+                {{form.password}}
+            </div>
+            {{form.submit(class="btn")}}
+        </form>
+    </div>
+{%endblock%}
+</body>
+</html>

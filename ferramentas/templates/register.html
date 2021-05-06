@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+{%extends "navbar.html"%}
+<head>
+    {%block header%}
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {%endblock%}
+</head>
+<body>
+{%block content%}
+    <div class="links">
+        <h1>REGISTRAR USUÁRIO</h1>
+        <form method="post">
+            {{ form.csrf_token }}
+            <div class="campo">
+                {{form.name.label}}
+                {{form.name(autocomplete="off")}}
+            </div>
+            <div class="campo">
+                {{form.password.label}}
+                {{form.password}}
+            </div>
+            <div class="campo">
+                {{form.nivel.label}}
+                {{form.nivel(autocomplete="off")}}
+            </div>
+            <div class="campo">
+                {{form.secretaria.label}}
+                {{form.secretaria}}
+            </div>
+            {{form.submit(class="btn")}}
+        </form>
+    </div>
+{%endblock%}
+</body>
+</html>

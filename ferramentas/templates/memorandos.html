@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+{%extends "navbar.html"%}
+<head>
+    {%block header%}
+    <meta charset="UTF-8">
+    <title>Memorandos</title>
+    {%endblock%}
+</head>
+<body>
+{%block content%}
+<div class="container">
+    <div class="links" id="memo-form">
+        <h1>Incluir Memorando</h1>
+        <form method="POST">
+            {{ form.csrf_token }}
+            <input type="hidden" name="memo" value="incluir">
+            <div class="campo">
+                {{form.data.label}}
+                {{form.data(autocomplete="off")}}
+            </div>
+            <div class="campo">
+                {{form.credor.label}}
+                {{form.credor(autocomplete="on")}}
+            </div>
+            <div class="campo">
+                {{form.historico.label}}
+                {{form.historico(style="resize: none; height: 15vh;")}}
+            </div>
+            <div class="campo">
+                {{form.valor.label}}
+                {{form.valor}}
+            </div>
+            {{form.submit(class="btn")}}
+        </form>
+    </div>
+    <div class="">
+        <table>
+            <thead>
+                <th>Data</th>
+                <th>Número de memorando</th>
+                <th>Credor</th>
+                <th>Histórico</th>
+                <th>Valor (R$)</th>
+                <th>Criador</th>
+                <th>Opções</th>
+            </thead>
+            <tbody>
+
+            <p style="background-color: #ccc;">Memorandos: {{table|length}}</p>
+            {% if table|length > 0 %}
+                {% for i in table %}
+                    <tr>
+                        <td>{{formatData(i.data_memorando)}}</td>
+                        <td>{{i.n_memorando}}</td>
+                        <td>{{i.credor}}</td>
+                        <td class="historico-cell">{{i.historico}}</td>
+                        <td>{{i.valor}}</td>
+                        <td>{{ user.query.filter_by(id=i.id_criador).first().username }}</td>
+                        <td>
+                            <form method="post" id="form-options">
+                                <input type="hidden" id="{{i.data_memorando}}{{i.n_memorando}}" name="memo" value="{{i.data_memorando}}_{{i.n_memorando}}">
+                                {{form2.submit(value="Remover", class="btn")}}
+                            </form>
+                        </td>
+                    </tr>
+                {%endfor%}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}
+</body>
+</html>

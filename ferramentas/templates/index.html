@@ -1,1 +1,32 @@
-a
+<!DOCTYPE html>
+{% extends "navbar.html" %}
+<head>
+    {%block header%}
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início</title>
+    {% endblock%}
+</head>
+<body>
+{% block content %}
+<div class="links">
+    <h1>FERRAMENTAS</h1>
+    <h2>Bem findo ao "Ferramentas"!</h2>
+    <p>Selecione abaixo oque deseja fazer:</p>
+        <a class="btn" href="{{url_for('certidoes')}}">
+            <img src="{{url_for('static',filename='rsc/certidao.svg')}}" alt="Bransão de Alagoas" width="50" height="50" class="icon">
+            <span>Emissão de Certidões e links Uteis</span>
+        </a>
+        <a class="btn" href="{{url_for('folha')}}">
+            <img src="{{url_for('static',filename='rsc/folha.svg')}}" alt="Bransão de Alagoas" width="50" height="50" class="icon">
+            <span>Detalhamento de folha</span>
+        </a>
+           <a class="btn" href="{{url_for('memorando')}}">
+            <img src="{{url_for('static',filename='rsc/memorando.svg')}}" alt="Bransão de Alagoas" width="50" height="50" class="icon">
+            <span>Gerenciamento de memorandos</span>
+        </a>
+</div>
+{% endblock %}
+</body>
+
+</html>
