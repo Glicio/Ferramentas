@@ -26,7 +26,7 @@ def folha():
 def memorando():
     form = MemorandoIncluirForm()
     form2 = RegisterForm()
-    table = Memorando.query.filter_by(secretaria_criador=current_user.secretaria).order_by(Memorando.data_memorando).all()
+    table = Memorando.query.filter_by(secretaria_criador=current_user.secretaria).order_by(Memorando.data_memorando.desc()).all()
     table2 = Memorando.query.filter_by(secretaria_criador=current_user.secretaria).order_by(Memorando.n_memorando).all()
     if form.validate_on_submit():
         memorando_a_criar = Memorando(n_memo_to_set=[table2,form.data.data], data_memorando=form.data.data,
