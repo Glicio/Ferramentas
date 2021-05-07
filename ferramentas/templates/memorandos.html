@@ -4,12 +4,14 @@
 <head>
     {%block header%}
     <meta charset="UTF-8">
-    <title>Memorandos</title>
+    <title>Memorandos da {{current_user.secretaria}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/memorando.css') }}">
     {%endblock%}
 </head>
 <body>
 {%block content%}
-<div class="container">
+<div class="container-memorando">
     <div class="links" id="memo-form">
         <h1>Incluir Memorando</h1>
         <form method="POST">
@@ -17,7 +19,7 @@
             <input type="hidden" name="memo" value="incluir">
             <div class="campo">
                 {{form.data.label}}
-                {{form.data(autocomplete="off")}}
+                {{form.data(autocomplete="off",type="date")}}
             </div>
             <div class="campo">
                 {{form.credor.label}}
@@ -29,30 +31,32 @@
             </div>
             <div class="campo">
                 {{form.valor.label}}
-                {{form.valor}}
+                {{form.valor(id="valor")}}
             </div>
             {{form.submit(class="btn")}}
         </form>
     </div>
-    <div class="">
-        <table>
+    
+    <div class="tabela-memorandos-ct">
+        <strong><p class="qtd-memo">|Secretaria: {{current_user.secretaria}}| |Usuário: {{current_user.username}}| |Total de memorandos: {{table|length}}|</p></strong>
+        <table id="tabela-memorandos" class="tabela-memorandos">
             <thead>
                 <th>Data</th>
                 <th>Número de memorando</th>
                 <th>Credor</th>
-                <th>Histórico</th>
+                <th class="historico-cell">Histórico</th>
                 <th>Valor (R$)</th>
                 <th>Criador</th>
                 <th>Opções</th>
             </thead>
             <tbody>
 
-            <p style="background-color: #ccc;">Memorandos: {{table|length}}</p>
+            
             {% if table|length > 0 %}
                 {% for i in table %}
                     <tr>
                         <td>{{formatData(i.data_memorando)}}</td>
-                        <td>{{i.n_memorando}}</td>
+                        <td>{{formatNumeroMemorando(i.data_memorando,i.n_memorando)}}</td>
                         <td>{{i.credor}}</td>
                         <td class="historico-cell">{{i.historico}}</td>
                         <td>{{i.valor}}</td>
@@ -70,6 +74,7 @@
         </table>
     </div>
 </div>
+<script src="{{url_for('static', filename='js/memo.js')}}"></script>
 {%endblock%}
 </body>
 </html>
