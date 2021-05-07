@@ -2,12 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-from ferramentas.funcoes import formatData
+from ferramentas.funcoes import formatData, formatNumeroMemorando
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///ferramentas.db"
 app.config['SECRET_KEY'] = "11fbf5e98d8aa591a4303751"
 app.jinja_env.globals.update(formatData=formatData)
+app.jinja_env.globals.update(formatNumeroMemorando=formatNumeroMemorando)
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login_page"

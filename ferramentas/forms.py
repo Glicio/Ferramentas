@@ -26,7 +26,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField(label='Enviar')
 
 class MemorandoIncluirForm(FlaskForm):
-    data = DateField('Data(*)',validators=[DataRequired()],format="%d/%m/%Y")
+    data = DateField('Data(*)',validators=[DataRequired()],format="%Y-%m-%d")
     credor = StringField('Credor(*)',validators=[DataRequired()])
     historico = TextAreaField('Historico')
     valor = StringField('Valor')
